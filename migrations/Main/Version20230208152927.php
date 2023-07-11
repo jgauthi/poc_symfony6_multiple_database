@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace DoctrineMigrations;
+namespace DoctrineMigrations\Main;
 
 use Doctrine\DBAL\Platforms\{MySqlPlatform, SqlitePlatform};
 use Doctrine\DBAL\Schema\Schema;

@@ -8,6 +8,7 @@
     "ext-ctype": "*",
     "ext-iconv": "*",
     "ext-simplexml": "*",
+    "avaibooksports/doctrine-migrations-multiple-database-bundle": "^0.4.1",
     "doctrine/annotations": "*",
     "doctrine/doctrine-bundle": "*",
     "doctrine/doctrine-migrations-bundle": "*",

@@ -30,7 +30,9 @@ composer install
 # (optional) Copy and edit configuration values ".env.local"
 
 php bin/console doctrine:database:create
+php bin/console doctrine:database:create --connection=second
 php bin/console doctrine:migrations:migrate -n
+
 
 # Optional
 php bin/console doctrine:fixtures:load -n
@@ -52,3 +54,7 @@ APP_ENV=test php -d variables_order=EGPCS -S 127.0.0.1:8000 -t public/
 Alternatively, you can [configure a web server](https://symfony.com/doc/current/cookbook/configuration/web_server_configuration.html) like Nginx or Apache to run the application.
 
 Your commit is checked by several dev tools (like phpstan, php cs fixer...). These tools were managed by [Grumphp](https://github.com/phpro/grumphp), you can edit configuration on file [grumphp.yml](./grumphp.yml) or check manually with the command: `./vendor/bin/grumphp run`.
+
+
+## Development notes
+For make new migration, don't use the command `php bin/console make:migration` (no compatible with DoctrineMigrationsMultipleDatabaseBundle), instead use: `php bin/console doctrine:migrations:diff`.

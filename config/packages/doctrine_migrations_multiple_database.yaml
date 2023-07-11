@@ -1,0 +1,8 @@
+doctrine_migrations_multiple_database:
+  entity_managers:
+    default:
+      migrations_paths:
+        DoctrineMigrations\Main: '%kernel.project_dir%/migrations/Main'
+    second:
+      migrations_paths:
+        DoctrineMigrations\Second: '%kernel.project_dir%/migrations/Second'

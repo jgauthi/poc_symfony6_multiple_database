@@ -4,8 +4,70 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c3893f1716d74fc6cbdb3daa45eb7160",
+    "content-hash": "9df1d4e8e3f9b63f77f893aff8ad6b9b",
     "packages": [
+        {
+            "name": "avaibooksports/doctrine-migrations-multiple-database-bundle",
+            "version": "0.4.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/AvaiBookSports/DoctrineMigrationsMultipleDatabaseBundle.git",
+                "reference": "03f54f42f25b915c356280dff774fd4c3622ccdb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/AvaiBookSports/DoctrineMigrationsMultipleDatabaseBundle/zipball/03f54f42f25b915c356280dff774fd4c3622ccdb",
+                "reference": "03f54f42f25b915c356280dff774fd4c3622ccdb",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/doctrine-bundle": "~1.0|~2.0",
+                "doctrine/doctrine-migrations-bundle": "^3",
+                "doctrine/migrations": "~3.0",
+                "php": ">=7.2",
+                "symfony/framework-bundle": "~3.4|~4.0|~5.0|~6.0"
+            },
+            "require-dev": {
+                "doctrine/orm": "^2.6",
+                "friendsofphp/php-cs-fixer": "^2.16",
+                "phpstan/phpstan": "^0.12.48",
+                "phpstan/phpstan-strict-rules": "^0.12.5",
+                "phpstan/phpstan-symfony": "^0.12.8"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-4": {
+                    "AvaiBookSports\\Bundle\\MigrationsMutlipleDatabase\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Pablo Largo",
+                    "email": "devnix.code@gmail.com"
+                },
+                {
+                    "name": "AvaiBook Sports",
+                    "email": "desarrollo@avaibooksports.com",
+                    "homepage": "https://www.avaibooksports.com"
+                }
+            ],
+            "description": "Symfony DoctrineMigrationsMultipleDatabaseBundle",
+            "keywords": [
+                "Multiple databases",
+                "dbal",
+                "migrations",
+                "schema"
+            ],
+            "support": {
+                "issues": "https://github.com/AvaiBookSports/DoctrineMigrationsMultipleDatabaseBundle/issues",
+                "source": "https://github.com/AvaiBookSports/DoctrineMigrationsMultipleDatabaseBundle/tree/0.4.1"
+            },
+            "time": "2023-06-25T10:24:13+00:00"
+        },
         {
             "name": "doctrine/annotations",
             "version": "2.0.1",
