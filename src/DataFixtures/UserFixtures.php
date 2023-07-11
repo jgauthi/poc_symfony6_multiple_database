@@ -1,12 +1,14 @@
 <?php
+
 namespace App\DataFixtures;
 
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Bundle\FixturesBundle\FixtureGroupInterface;
 use Doctrine\Persistence\ObjectManager;
 use Faker\Factory as FakerFactory;
 
-class UserFixtures extends Fixture
+class UserFixtures extends Fixture implements FixtureGroupInterface
 {
     public const USERS = [
         'admin' => ['enabled' => true, 'roles' => [User::ROLE_ADMIN]],
@@ -39,5 +41,13 @@ class UserFixtures extends Fixture
         }
 
         $manager->flush();
+    }
+
+    /**
+     * @return string[]
+     */
+    public static function getGroups(): array
+    {
+        return ['default'];
     }
 }

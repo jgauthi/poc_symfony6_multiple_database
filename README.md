@@ -33,9 +33,8 @@ php bin/console doctrine:database:create
 php bin/console doctrine:database:create --connection=second
 php bin/console doctrine:migrations:migrate -n
 
-
 # Optional
-php bin/console doctrine:fixtures:load -n
+php bin/console app:fixtures
 ```
 
 For the asset symlink install, launch a terminal on administrator in Windows environment.

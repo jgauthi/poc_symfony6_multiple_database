@@ -1,12 +1,14 @@
 <?php
+
 namespace App\DataFixtures;
 
 use App\Entity\Client;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Bundle\FixturesBundle\FixtureGroupInterface;
 use Doctrine\Persistence\ObjectManager;
 use Faker\Factory as FakerFactory;
 
-class ClientFixtures extends Fixture
+class ClientFixtures extends Fixture implements FixtureGroupInterface
 {
     public const NB_FIXTURE = 10;
     private \Faker\Generator $faker;
@@ -32,5 +34,13 @@ class ClientFixtures extends Fixture
         }
 
         $manager->flush();
+    }
+
+    /**
+     * @return string[]
+     */
+    public static function getGroups(): array
+    {
+        return ['default'];
     }
 }

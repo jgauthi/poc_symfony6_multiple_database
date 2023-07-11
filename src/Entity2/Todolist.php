@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: \App\Repository2\TodolistRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class Todolist
 {
     #[ORM\Id, ORM\GeneratedValue, ORM\Column]
