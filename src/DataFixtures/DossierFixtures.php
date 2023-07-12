@@ -1,24 +1,14 @@
 <?php
-
 namespace App\DataFixtures;
 
 use App\Entity\Enum\DossierStatusEnum;
 use App\Entity\{Client, Dossier, User};
-use Doctrine\Bundle\FixturesBundle\Fixture;
-use Doctrine\Bundle\FixturesBundle\FixtureGroupInterface;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
-use Faker\Factory as FakerFactory;
 
-class DossierFixtures extends Fixture implements DependentFixtureInterface, FixtureGroupInterface
+class DossierFixtures extends AbstractFixture implements DependentFixtureInterface
 {
     public const NB_FIXTURE = 20;
-    private \Faker\Generator $faker;
-
-    public function __construct()
-    {
-        $this->faker = FakerFactory::create();
-    }
 
     public function load(ObjectManager $manager): void
     {
@@ -59,13 +49,5 @@ class DossierFixtures extends Fixture implements DependentFixtureInterface, Fixt
             ClientFixtures::class,
             UserFixtures::class,
         ];
-    }
-
-    /**
-     * @return string[]
-     */
-    public static function getGroups(): array
-    {
-        return ['default'];
     }
 }

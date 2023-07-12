@@ -1,21 +1,12 @@
 <?php
-
 namespace App\DataFixtures;
 
 use App\Entity2\Todolist;
-use Doctrine\Bundle\FixturesBundle\{Fixture, FixtureGroupInterface};
 use Doctrine\Persistence\ObjectManager;
-use Faker\Factory as FakerFactory;
 
-class TodolistFixtures extends Fixture implements FixtureGroupInterface
+class TodolistFixtures extends AbstractFixture
 {
     public const NB_FIXTURE = 5;
-    private \Faker\Generator $faker;
-
-    public function __construct()
-    {
-        $this->faker = FakerFactory::create();
-    }
 
     public function load(ObjectManager $manager): void
     {
@@ -35,7 +26,7 @@ class TodolistFixtures extends Fixture implements FixtureGroupInterface
     /**
      * @return string[]
      */
-    public static function getGroups(): array
+    static public function getGroups(): array
     {
         return ['second'];
     }

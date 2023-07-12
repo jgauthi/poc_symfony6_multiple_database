@@ -1,14 +1,10 @@
 <?php
-
 namespace App\DataFixtures;
 
 use App\Entity\User;
-use Doctrine\Bundle\FixturesBundle\Fixture;
-use Doctrine\Bundle\FixturesBundle\FixtureGroupInterface;
 use Doctrine\Persistence\ObjectManager;
-use Faker\Factory as FakerFactory;
 
-class UserFixtures extends Fixture implements FixtureGroupInterface
+class UserFixtures extends AbstractFixture
 {
     public const USERS = [
         'admin' => ['enabled' => true, 'roles' => [User::ROLE_ADMIN]],
@@ -17,12 +13,6 @@ class UserFixtures extends Fixture implements FixtureGroupInterface
         'commentator' => ['enabled' => true, 'roles' => [User::ROLE_COMMENTATOR]],
     ];
     public const PASSWORD = 'local';
-    private \Faker\Generator $faker;
-
-    public function __construct()
-    {
-        $this->faker = FakerFactory::create();
-    }
 
     public function load(ObjectManager $manager): void
     {
@@ -41,13 +31,5 @@ class UserFixtures extends Fixture implements FixtureGroupInterface
         }
 
         $manager->flush();
-    }
-
-    /**
-     * @return string[]
-     */
-    public static function getGroups(): array
-    {
-        return ['default'];
     }
 }

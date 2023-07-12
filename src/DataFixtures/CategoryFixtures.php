@@ -1,23 +1,18 @@
 <?php
-
 namespace App\DataFixtures;
 
 use App\Entity\Category;
-use Doctrine\Bundle\FixturesBundle\Fixture;
-use Doctrine\Bundle\FixturesBundle\FixtureGroupInterface;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
-use Faker\Factory as FakerFactory;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
-class CategoryFixtures extends Fixture implements DependentFixtureInterface, FixtureGroupInterface
+class CategoryFixtures extends AbstractFixture implements DependentFixtureInterface
 {
     public const NB_FIXTURE = 7;
-    private \Faker\Generator $faker;
 
     public function __construct(private string $imagesPublic, private string $imagesCategoryPublic)
     {
-        $this->faker = FakerFactory::create();
+        parent::__construct();
     }
 
     /**
@@ -76,13 +71,5 @@ class CategoryFixtures extends Fixture implements DependentFixtureInterface, Fix
         return [
             DossierFixtures::class,
         ];
-    }
-
-    /**
-     * @return string[]
-     */
-    public static function getGroups(): array
-    {
-        return ['default'];
     }
 }
