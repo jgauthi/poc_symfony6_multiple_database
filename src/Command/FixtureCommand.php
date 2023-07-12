@@ -1,22 +1,54 @@
 <?php
+
 namespace App\Command;
 
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Style\SymfonyStyle;
+use Symfony\Component\HttpKernel\KernelInterface;
 
 #[AsCommand(
     name: 'app:fixtures',
-    description: 'Load fixtures for all databases',
+    description: 'Load fixtures for all databases (only for dev environnement)',
 )]
 class FixtureCommand extends Command
 {
     // Entity Manager name (groups should be used the same value)
     private const LIST_DATABASE = ['default', 'second'];
 
+    /** @var bool[] */
+    private array $requirement;
+
+    public function __construct(KernelInterface $kernel, string $name = null)
+    {
+        parent::__construct($name);
+
+        $this->requirement = [
+            'doctrine_fixture' => array_key_exists('DoctrineFixturesBundle', $kernel->getBundles()),
+            'doctrine_migration' => array_key_exists('DoctrineMigrationsBundle', $kernel->getBundles()),
+            'doctrine_multiple_migration' => array_key_exists('DoctrineMigrationsMultipleDatabaseBundle', $kernel->getBundles()),
+        ];
+    }
+
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
+        $io = new SymfonyStyle($input, $output);
+        if (!$this->requirement['doctrine_fixture']) {
+            $io->error('The bundle DoctrineFixturesBundle is inactive or the APP_ENV value is not dev');
+
+            return Command::INVALID;
+        } elseif (!$this->requirement['doctrine_migration']) {
+            $io->error('The bundle DoctrineMigrationsBundle is inactive.');
+
+            return Command::INVALID;
+        } elseif (!$this->requirement['doctrine_multiple_migration']) {
+            $io->error('The bundle DoctrineMigrationsMultipleDatabaseBundle is inactive');
+
+            return Command::INVALID;
+        }
+
         $console = 'php '.realpath(__DIR__.'/../../bin/console');
         $command = 'doctrine:fixtures:load';
 
@@ -25,8 +57,8 @@ class FixtureCommand extends Command
         // $symfonyCommand->run(new ArrayInput(['--em' => 'default', '--group' => 'default', '--no-interaction' => null]), $output);
 
         foreach (self::LIST_DATABASE as $database) {
-            $output->write('Install fixtures for database: '.$database);
-            $output->writeln((string) shell_exec("{$console} {$command} --em={$database} --group={$database} --no-interaction"));
+            $io->title('Install fixtures for database: '.$database);
+            $io->writeln((string) shell_exec("{$console} {$command} --em={$database} --group={$database} --no-interaction"));
         }
 
         return Command::SUCCESS;

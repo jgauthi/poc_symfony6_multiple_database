@@ -34,7 +34,7 @@ return (new PhpCsFixer\Config)
         'php_unit_strict' => true,
         'phpdoc_order' => true,
         'semicolon_after_instruction' => true,
-        'single_blank_line_before_namespace' => false,
+        'blank_lines_before_namespace' => false,
         'single_import_per_statement' => false,
         'single_trait_insert_per_statement' => false,
         'strict_comparison' => true,
@@ -42,4 +42,4 @@ return (new PhpCsFixer\Config)
     ])
     ->setFinder($finder)
     ->setCacheFile(__DIR__.'/var/cache/.php_cs.cache')
-    ;
+;
