@@ -1,13 +1,13 @@
-# POC Symfony 6
-Description for the poc (to completed).
+# POC Symfony 6 Multiple Databases
+A symfony example with usage of multiple databases with sqlite in this example (migrations can be edited for be used with mysql or postgresql). In this source code, you can look at:
 
-**Instructions for the construction of this repot** (to be removed in the poc): This package does not propose by default, some libraries because they do not seem useful for the majority of the pocs. However, you can install them manually if needed. Examples:
+* migrations
+* src/Command
+* src/DataFixtures
+* src/Entity
+* src/Repository
 
-* HttpClient: `composer require symfony/http-client`
-* Mailer: `composer require symfony/mailer`
-* Notifier: `composer require symfony/notifier`
-* TestUnits: `composer require --dev symfony/test-pack`
-
+The sqlite databases are stored in var/ folder.
 
 ## Prerequisites
 

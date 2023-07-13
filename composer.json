@@ -1,6 +1,6 @@
 {
-  "name": "jgauthi/template_symfony_starterpack",
-  "description": "Symfony with some entities and base controller for create POC",
+  "name": "jgauthi/poc_symfony6_multiple_database",
+  "description": "A symfony example with usage of multiple databases",
   "type": "project",
   "license": "GPL-3.0-only",
   "require": {
