@@ -1,9 +1,10 @@
 <?php
 namespace App\Controller;
 
-use App\Entity\Dossier;
 use App\Entity\Enum\DossierStatusEnum;
-use App\Repository\DossierRepository;
+use App\Entity\Main\Dossier;
+use App\Repository\Main\DossierRepository;
+use App\Repository\Second\TodolistRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\{Request, Response};
@@ -16,13 +17,15 @@ class DossierController extends AbstractController
     }
 
     #[Route('/', name: 'dossierList', methods: [Request::METHOD_GET])]
-    public function dossierList(Request $request, PaginatorInterface $paginator): Response
+    public function dossierList(Request $request, PaginatorInterface $paginator, TodolistRepository $todolistRepository): Response
     {
         $query = $this->dossierRepository->findByStatus(DossierStatusEnum::ACTIVE);
         $dossierList = $paginator->paginate($query, $request->query->getInt('page', 1), 6);
+        $todolist = $todolistRepository->findBy([], ['lastUpdate' => 'DESC'], 5);
 
         return $this->render('dossierList.html.twig', [
             'dossierList' => $dossierList,
+            'todolist' => $todolist,
         ]);
     }
 
