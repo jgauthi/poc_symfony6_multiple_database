@@ -17,8 +17,8 @@ abstract class AbstractFixture extends Fixture implements FixtureGroupInterface
     /**
      * @return string[]
      */
-    static public function getGroups(): array
+    public static function getGroups(): array
     {
-        return ['default'];
+        return ['main'];
     }
 }

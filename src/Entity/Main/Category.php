@@ -1,5 +1,5 @@
 <?php
-namespace App\Entity;
+namespace App\Entity\Main;
 
 use App\Entity\Trait\LastUpdateTrait;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
-#[ORM\Entity(repositoryClass: \App\Repository\CategoryRepository::class)]
+#[ORM\Entity(repositoryClass: \App\Repository\Main\CategoryRepository::class)]
 #[ORM\HasLifecycleCallbacks]
 #[Vich\Uploadable]
 class Category

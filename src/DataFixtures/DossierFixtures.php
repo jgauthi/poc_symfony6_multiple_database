@@ -2,7 +2,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\Enum\DossierStatusEnum;
-use App\Entity\{Client, Dossier, User};
+use App\Entity\{Main\Client, Main\Dossier, Main\User};
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 

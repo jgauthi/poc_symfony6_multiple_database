@@ -1,7 +1,7 @@
 <?php
 namespace App\DataFixtures;
 
-use App\Entity\Client;
+use App\Entity\Main\Client;
 use Doctrine\Persistence\ObjectManager;
 
 class ClientFixtures extends AbstractFixture

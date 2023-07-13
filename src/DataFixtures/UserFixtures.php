@@ -1,7 +1,7 @@
 <?php
 namespace App\DataFixtures;
 
-use App\Entity\User;
+use App\Entity\Main\User;
 use Doctrine\Persistence\ObjectManager;
 
 class UserFixtures extends AbstractFixture

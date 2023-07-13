@@ -1,7 +1,7 @@
 <?php
 namespace App\DataFixtures;
 
-use App\Entity2\Todolist;
+use App\Entity\Second\Todolist;
 use Doctrine\Persistence\ObjectManager;
 
 class TodolistFixtures extends AbstractFixture
@@ -12,8 +12,8 @@ class TodolistFixtures extends AbstractFixture
     {
         for ($i = 0; $i < self::NB_FIXTURE; ++$i) {
             $todolist = (new Todolist)
-                ->setTitle($this->faker->unique()->title())
-                ->setDescription($this->faker->text())
+                ->setTitle($this->faker->unique()->text(20))
+                ->setDescription($this->faker->text(50))
             ;
 
             $manager->persist($todolist);
@@ -26,7 +26,7 @@ class TodolistFixtures extends AbstractFixture
     /**
      * @return string[]
      */
-    static public function getGroups(): array
+    public static function getGroups(): array
     {
         return ['second'];
     }

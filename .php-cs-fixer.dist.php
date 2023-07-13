@@ -39,6 +39,7 @@ return (new PhpCsFixer\Config)
         'single_trait_insert_per_statement' => false,
         'strict_comparison' => true,
         'strict_param' => true,
+        'nullable_type_declaration_for_default_null_value' => true,
     ])
     ->setFinder($finder)
     ->setCacheFile(__DIR__.'/var/cache/.php_cs.cache')

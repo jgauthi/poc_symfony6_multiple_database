@@ -1,8 +1,8 @@
 <?php
-namespace App\Repository;
+namespace App\Repository\Main;
 
-use App\Entity\Dossier;
 use App\Entity\Enum\DossierStatusEnum;
+use App\Entity\Main\Dossier;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Query;
 use Doctrine\Persistence\ManagerRegistry;

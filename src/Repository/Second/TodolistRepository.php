@@ -1,8 +1,7 @@
 <?php
+namespace App\Repository\Second;
 
-namespace App\Repository2;
-
-use App\Entity2\Todolist;
+use App\Entity\Second\Todolist;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 

@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Command;
 
 use Symfony\Component\Console\Attribute\AsCommand;
@@ -16,12 +15,12 @@ use Symfony\Component\HttpKernel\KernelInterface;
 class FixtureCommand extends Command
 {
     // Entity Manager name (groups should be used the same value)
-    private const LIST_DATABASE = ['default', 'second'];
+    private const LIST_DATABASE = ['main', 'second'];
 
     /** @var bool[] */
     private array $requirement;
 
-    public function __construct(KernelInterface $kernel, string $name = null)
+    public function __construct(KernelInterface $kernel, ?string $name = null)
     {
         parent::__construct($name);
 

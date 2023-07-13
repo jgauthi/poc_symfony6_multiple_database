@@ -1,7 +1,7 @@
 <?php
 namespace App\Event\Subscriber;
 
-use App\Entity\User;
+use App\Entity\Main\User;
 use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Events;
 use Doctrine\Persistence\Event\LifecycleEventArgs;

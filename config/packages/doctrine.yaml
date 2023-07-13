@@ -8,9 +8,9 @@ parameters:
 
 doctrine:
   dbal:
-    default_connection: default
+    default_connection: main
     connections:
-      default:
+      main:
         url: '%env(resolve:DATABASE_URL)%'
         default_table_options:
           charset: utf8
@@ -22,18 +22,18 @@ doctrine:
           collate: utf8_unicode_ci
 
   orm:
-    auto_generate_proxy_classes: false # true on BB-Api
-    default_entity_manager: default
+    auto_generate_proxy_classes: true
+    default_entity_manager: main
     entity_managers:
-      default:
-        connection: default
+      main:
+        connection: main
         naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
         mappings:
           App:
             is_bundle: false
             type: attribute
-            dir: '%kernel.project_dir%/src/Entity/'
-            prefix: 'App\Entity'
+            dir: '%kernel.project_dir%/src/Entity/Main'
+            prefix: 'App\Entity\Main'
             alias: App
       second:
         connection: second
@@ -42,8 +42,8 @@ doctrine:
           Second:
             is_bundle: false
             type: attribute
-            dir: '%kernel.project_dir%/src/Entity2/'
-            prefix: 'App\Entity2'
+            dir: '%kernel.project_dir%/src/Entity/Second'
+            prefix: 'App\Entity\Second'
             alias: Second
 
 when@prod:

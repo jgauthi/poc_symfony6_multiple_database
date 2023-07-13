@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Entity2;
+namespace App\Entity\Second;
 
 use App\Entity\Trait\LastUpdateTrait;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
-#[ORM\Entity(repositoryClass: \App\Repository2\TodolistRepository::class)]
+#[ORM\Entity(repositoryClass: \App\Repository\Second\TodolistRepository::class)]
 #[ORM\HasLifecycleCallbacks]
 class Todolist
 {
