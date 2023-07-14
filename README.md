@@ -56,4 +56,6 @@ Your commit is checked by several dev tools (like phpstan, php cs fixer...). The
 
 
 ## Development notes
-For make new migration, don't use the command `php bin/console make:migration` (no compatible with DoctrineMigrationsMultipleDatabaseBundle), instead use: `php bin/console doctrine:migrations:diff`.
+For make new migrations in dev environnement, use the command `php bin/console make:migration` (this poc update the command with adding multiple databases support).
+
+When you use the command `make:entity`, you should add the database namespace before the entity name. Example: _Second\Article_.

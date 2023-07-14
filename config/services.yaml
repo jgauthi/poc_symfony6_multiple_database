@@ -31,3 +31,6 @@ services:
     tags:
       - { name: doctrine.event_subscriber, event: prePersist }
       - { name: doctrine.event_subscriber, event: preUpdate }
+
+  maker.maker.make_migration:
+    class: App\Command\MakeMigrationCommand
