@@ -1,4 +1,14 @@
 <?php
+/*******************************************************************************
+ * @name: Command Fixture for Multiple databases
+ * @author: Jgauthi, created at [28july2023], url: <github.com/jgauthi/poc_symfony6_multiple_database>
+ * @version: 1.0
+ * @Requirements:
+    - PHP version >= 8.2+, Symfony 6.2+
+    - Doctrine with multiple configuration: https://symfony.com/doc/6.2/doctrine/multiple_entity_managers.html
+    - DoctrineMigrationsMultipleDatabaseBundle
+
+ *******************************************************************************/
 namespace App\Command;
 
 use Symfony\Component\Console\Attribute\AsCommand;
