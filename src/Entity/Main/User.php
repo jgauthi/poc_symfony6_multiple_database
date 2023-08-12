@@ -10,6 +10,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Constraints\PasswordStrength;
 
 #[ORM\Entity(repositoryClass: \App\Repository\Main\UserRepository::class),
     UniqueEntity('username', errorPath: 'username'),
@@ -33,17 +34,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private string $username;
 
     #[ORM\Column(length: 255)]
-    #[Assert\Regex(
-        pattern: '#(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9]).{7,}#',
-        message: 'Password must be 7 characters long and contain at least one digit, one uppercase letter and one lower case letter.'
-    )]
+    #[Assert\PasswordStrength(['minScore' => PasswordStrength::STRENGTH_STRONG])]
     private string $password;
 
     // Plain password. Used for model validation. Must not be persisted.
-    #[Assert\Regex(
-        pattern: '#(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9]).{7,}#',
-        message: 'Password must be 7 characters long and contain at least one digit, one uppercase letter and one lower case letter.'
-    )]
+    #[Assert\PasswordStrength(['minScore' => PasswordStrength::STRENGTH_STRONG])]
     private ?string $plainPassword = null;
 
     #[ORM\Column(length: 255)]

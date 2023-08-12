@@ -2,9 +2,9 @@
 /*******************************************************************************
  * @name: Command Make Migration for Multiple databases
  * @author: Jgauthi, created at [28july2023], url: <github.com/jgauthi/poc_symfony6_multiple_database>
- * @version: 1.0
+ * @version: 1.0.2
  * @Requirements:
-    - PHP version >= 8.2+, Symfony 6.2+
+    - PHP version >= 8.2+, Symfony 6.3+
     - Doctrine with multiple configuration: https://symfony.com/doc/6.2/doctrine/multiple_entity_managers.html
 
  *******************************************************************************/
@@ -15,8 +15,10 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\{ArrayInput, InputInterface};
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use Symfony\Component\DependencyInjection\Attribute\AsAlias;
 use Symfony\Component\HttpKernel\KernelInterface;
 
+#[AsAlias(id: 'maker.maker.make_migration')]
 #[AsCommand(
     name: 'make:migration',
     description: 'Enhance the command for support multiple databases.',
