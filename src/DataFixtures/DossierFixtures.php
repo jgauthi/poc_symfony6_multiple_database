@@ -8,7 +8,7 @@ use Doctrine\Persistence\ObjectManager;
 
 class DossierFixtures extends AbstractFixture implements DependentFixtureInterface
 {
-    public const NB_FIXTURE = 20;
+    public const int NB_FIXTURE = 20;
 
     public function load(ObjectManager $manager): void
     {
@@ -23,11 +23,11 @@ class DossierFixtures extends AbstractFixture implements DependentFixtureInterfa
         };
 
         for ($i = 0; $i < self::NB_FIXTURE; ++$i) {
-            /** @var Client $randomClient */
             $randomClient = rand(0, ClientFixtures::NB_FIXTURE - 1);
-            $randomClient = $this->getReference("client_{$randomClient}"); /** @var Client $randomClient */
+            /** @var Client $randomClient */
+            $randomClient = $this->getReference("client_{$randomClient}", Client::class); /** @var Client $randomClient */
             $randomUsername = array_rand(UserFixtures::USERS, 1);
-            $randomUsername = $this->getReference("user_{$randomUsername}"); /** @var User $randomUsername */
+            $randomUsername = $this->getReference("user_{$randomUsername}", User::class); /** @var User $randomUsername */
             $dossier = (new Dossier)
                 ->setTitle(ucfirst(implode(' ', (array) $this->faker->unique()->words(rand(2, 4)))))
                 ->setContent($this->faker->text())

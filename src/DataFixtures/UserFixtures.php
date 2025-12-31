@@ -6,13 +6,13 @@ use Doctrine\Persistence\ObjectManager;
 
 class UserFixtures extends AbstractFixture
 {
-    public const USERS = [
+    public const array USERS = [
         'admin' => ['enabled' => true, 'roles' => [User::ROLE_ADMIN]],
         'editor' => ['enabled' => false, 'roles' => [User::ROLE_EDITOR]],
         'writer' => ['enabled' => true, 'roles' => [User::ROLE_WRITER]],
         'commentator' => ['enabled' => true, 'roles' => [User::ROLE_COMMENTATOR]],
     ];
-    public const PASSWORD = 'local';
+    public const string PASSWORD = 'local';
 
     public function load(ObjectManager $manager): void
     {

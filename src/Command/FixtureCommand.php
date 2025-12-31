@@ -2,74 +2,81 @@
 /*******************************************************************************
  * @name: Command Fixture for Multiple databases
  * @author: Jgauthi, created at [28july2023], url: <github.com/jgauthi/poc_symfony6_multiple_database>
- * @version: 1.0
+ * @version: 1.1
  * @Requirements:
-    - PHP version >= 8.2+, Symfony 6.2+
-    - Doctrine with multiple configuration: https://symfony.com/doc/6.2/doctrine/multiple_entity_managers.html
-    - DoctrineMigrationsMultipleDatabaseBundle
+    - PHP version >= 8.3+, Symfony 6.4+
+    - Doctrine with multiple configuration: https://symfony.com/doc/6.4/doctrine/multiple_entity_managers.html
 
  *******************************************************************************/
+
 namespace App\Command;
 
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
-use Symfony\Component\HttpKernel\KernelInterface;
+use Symfony\Component\Process\Process;
 
 #[AsCommand(
     name: 'app:fixtures',
-    description: 'Load fixtures for all databases (only for dev environnement)',
+    description: 'Load fixtures for all configured databases.',
 )]
 class FixtureCommand extends Command
 {
-    // Entity Manager name (groups should be used the same value)
-    public const LIST_DATABASE = ['main', 'second'];
+    // On réutilise la même liste que pour les migrations
+    private const array DATABASES = MakeMigrationCommand::LIST_DATABASE;
 
-    /** @var bool[] */
-    private array $requirement;
-
-    public function __construct(KernelInterface $kernel, ?string $name = null)
+    protected function configure(): void
     {
-        parent::__construct($name);
-
-        $this->requirement = [
-            'doctrine_fixture' => array_key_exists('DoctrineFixturesBundle', $kernel->getBundles()),
-            'doctrine_migration' => array_key_exists('DoctrineMigrationsBundle', $kernel->getBundles()),
-            'doctrine_multiple_migration' => array_key_exists('DoctrineMigrationsMultipleDatabaseBundle', $kernel->getBundles()),
-        ];
+        $this
+            ->addOption('append', null, InputOption::VALUE_NONE, 'Append the data fixtures instead of deleting all data from the database first.')
+            ->addOption('group', 'g', InputOption::VALUE_IS_ARRAY | InputOption::VALUE_REQUIRED, 'Only load fixtures that belong to this group.')
+        ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
-        if (!$this->requirement['doctrine_fixture']) {
-            $io->error('The bundle DoctrineFixturesBundle is inactive or the APP_ENV value is not dev');
+        $nbError = 0;
 
-            return Command::INVALID;
-        } elseif (!$this->requirement['doctrine_migration']) {
-            $io->error('The bundle DoctrineMigrationsBundle is inactive.');
+        foreach (self::DATABASES as $database) {
+            $io->title("Loading fixtures for database: $database");
 
-            return Command::INVALID;
-        } elseif (!$this->requirement['doctrine_multiple_migration']) {
-            $io->error('The bundle DoctrineMigrationsMultipleDatabaseBundle is inactive');
+            // Construction de la commande de base
+            $commandLine = [
+                'php',
+                'bin/console',
+                'doctrine:fixtures:load',
+                '--em=' . $database,
+                '--group=' . $database,
+                '--no-interaction'
+            ];
 
-            return Command::INVALID;
+            // Transmission de l'option --append
+            if ($input->getOption('append')) {
+                $commandLine[] = '--append';
+            }
+
+            // Transmission de l'environnement
+            if ($env = $input->getOption('env')) {
+                $commandLine[] = '--env=' . $env;
+            }
+
+            $process = (new Process($commandLine))->setTimeout(600);
+            $process->run(function ($type, $buffer) use ($output) {
+                $output->write($buffer);
+            });
+
+            if (!$process->isSuccessful()) {
+                $io->error("Failed to load fixtures for $database");
+                $nbError++;
+            } else {
+                $io->success("Fixtures loaded for $database");
+            }
         }
 
-        $console = 'php '.realpath(__DIR__.'/../../bin/console');
-        $command = 'doctrine:fixtures:load';
-
-        // No working with official solution, the arguments in ArrayInput are not recognise!!
-        // $symfonyCommand = $this->getApplication()->find($command);
-        // $symfonyCommand->run(new ArrayInput(['--em' => 'default', '--group' => 'default', '--no-interaction' => null]), $output);
-
-        foreach (self::LIST_DATABASE as $database) {
-            $io->title('Install fixtures for database: '.$database);
-            $io->writeln((string) shell_exec("{$console} {$command} --em={$database} --group={$database} --no-interaction"));
-        }
-
-        return Command::SUCCESS;
+        return $nbError === 0 ? Command::SUCCESS : Command::FAILURE;
     }
 }

@@ -1,0 +1,9 @@
+# Second Database
+# Do not mention doctrine_migrations at the top level
+em: second
+table_storage:
+    table_name: 'doctrine_migration_versions'
+
+migrations_paths:
+    'DoctrineMigrations\Second': 'migrations/Second'
+

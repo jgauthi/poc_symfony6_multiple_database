@@ -6,7 +6,7 @@ use Doctrine\Persistence\ObjectManager;
 
 class TodolistFixtures extends AbstractFixture
 {
-    public const NB_FIXTURE = 5;
+    public const int NB_FIXTURE = 5;
 
     public function load(ObjectManager $manager): void
     {

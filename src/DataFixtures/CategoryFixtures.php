@@ -2,13 +2,14 @@
 namespace App\DataFixtures;
 
 use App\Entity\Main\Category;
+use App\Entity\Main\Dossier;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class CategoryFixtures extends AbstractFixture implements DependentFixtureInterface
 {
-    public const NB_FIXTURE = 7;
+    public const int NB_FIXTURE = 7;
 
     public function __construct(private string $imagesPublic, private string $imagesCategoryPublic)
     {
@@ -57,7 +58,7 @@ class CategoryFixtures extends AbstractFixture implements DependentFixtureInterf
                 }
 
                 $alreadyUse[] = $randomDossier;
-                $category->addDossier($this->getReference("dossier_{$randomDossier}")); // @phpstan-ignore-line
+                $category->addDossier($this->getReference("dossier_{$randomDossier}", Dossier::class));
             }
 
             $manager->persist($category);

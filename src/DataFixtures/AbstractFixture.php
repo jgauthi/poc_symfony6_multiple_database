@@ -6,7 +6,7 @@ use Faker\Factory as FakerFactory;
 
 abstract class AbstractFixture extends Fixture implements FixtureGroupInterface
 {
-    public const NB_FIXTURE = 10;
+    public const int NB_FIXTURE = 10;
     protected \Faker\Generator $faker;
 
     public function __construct()
