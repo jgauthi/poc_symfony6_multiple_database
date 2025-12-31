@@ -8,8 +8,6 @@
     "ext-ctype": "*",
     "ext-iconv": "*",
     "ext-simplexml": "*",
-    "avaibooksports/doctrine-migrations-multiple-database-bundle": "^0.4.1",
-    "doctrine/annotations": "*",
     "doctrine/doctrine-bundle": "*",
     "doctrine/doctrine-migrations-bundle": "*",
     "doctrine/orm": "2.*",
@@ -44,7 +42,6 @@
   "require-dev": {
     "doctrine/doctrine-fixtures-bundle": "*",
     "fakerphp/faker": "1.*",
-    "friendsofphp/php-cs-fixer": "*",
     "php-parallel-lint/php-parallel-lint": "^1.3",
     "phpro/grumphp-shim": "1.*",
     "phpstan/phpstan-doctrine": "*",

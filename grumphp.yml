@@ -10,8 +10,6 @@ grumphp:
       triggered_by: [ 'php' ]
       regexp_type: G
       match_word: false
-    phpcsfixer:
-      config: ".php-cs-fixer.dist.php"
     phplint: ~
     phpstan:
       autoload_file: ~

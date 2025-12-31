@@ -17,7 +17,7 @@ The sqlite databases are stored in var/ folder.
 * The Ctype extension must be enabled
 * The date.timezone parameter must be defined in php.ini
 
-More information on [symfony website](https://symfony.com/doc/6.2/reference/requirements.html).
+More information on [symfony website](https://symfony.com/doc/6.4/reference/requirements.html).
 
 
 ## Installation
@@ -33,7 +33,7 @@ php bin/console doctrine:database:create
 php bin/console doctrine:database:create --connection=second
 php bin/console doctrine:migrations:migrate -n
 
-# Optional
+# Optional (require APP_ENV=dev)
 php bin/console app:fixtures
 ```
 

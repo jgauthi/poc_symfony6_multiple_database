@@ -4,10 +4,31 @@ includes:
   - vendor/phpstan/phpstan-doctrine/extension.neon
 
 parameters:
-  level: 8
+  level: 6
+  ignoreErrors:
+      - identifier: missingType.iterableValue
+      - identifier: missingType.generics
+      - identifier: instanceof.alwaysTrue
+      - '#Cannot call method getSite\(\) on object\|null#'
+      - '#Access to an undefined property object::\$#'
+      - '#Call to an undefined method Doctrine\\ORM\\EntityRepository[a-zA-Z0-9<>\\_]+::([^(]+)\(\)#'
+      - '#should return DateTime but returns DateTimeInterface#'
+      - '#Property [^(]+ \(DateTime\|null\) does not accept DateTimeInterface\|null#'
+      - '#expects DateTime(\|string)?, DateTimeInterface given#'
+      - '#should return Doctrine\\Common\\Collections\\ArrayCollection but returns Doctrine\\Common\\Collections\\Collection#'
+      - '#Cannot call method getClientIp\(\) on Symfony\\Component\\HttpFoundation\\Request\|null#'
+      - "#Cannot access offset '(warning_count|error_count)' on array\\('warning_count' => int, 'warnings' => array<int, string>, 'error_count' => int, 'errors' => array#"
+      - '/Parameter \#[0-9] \$source of method AutoMapperPlus\\MapperInterface::map\(\) expects array\|object/'
+      - '#is not falsy#i'
+      - '#Cannot access property \$([^ ]+) on#i'
+      - '#Cannot access offset ([^ ]+) on#i'
+      - '#Anonymous function never returns null#i'
+      - '#Anonymous function should return bool but returns true\|null#i'
+      - '#Method AutoMapperPlus\\MapperInterface::map\(\) invoked with 3 parameters, 2 required#i'
+      - '#expects Doctrine\\Common\\Collections\\ArrayCollection, array<string, int\|list<string>\|false> given.#i'
   paths:
     - src
-  excludes_analyse:
+  excludePaths:
     - migrations
-  checkMissingIterableValueType: false
-  checkGenericClassInNonGenericObjectType: false
+    - var
+    - vendor

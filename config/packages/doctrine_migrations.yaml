@@ -1,0 +1,14 @@
+# Main Database (Main)
+doctrine_migrations:
+    migrations_paths:
+        'DoctrineMigrations\Main': '%kernel.project_dir%/migrations/Main'
+
+    # Default Entity Manager for this configuration
+    em: main
+
+    # Correction de la structure storage
+    storage:
+        table_storage:
+            table_name: 'doctrine_migration_versions'
+
+    # Another configurations are located in config/migrations/
