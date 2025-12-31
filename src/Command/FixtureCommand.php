@@ -26,7 +26,7 @@ use Symfony\Component\Process\Process;
 class FixtureCommand extends Command
 {
     // On réutilise la même liste que pour les migrations
-    private const array DATABASES = MakeMigrationCommand::LIST_DATABASE;
+    private const array LIST_DATABASE = LoadMigrationsCommand::LIST_DATABASE;
 
     protected function configure(): void
     {
@@ -41,7 +41,7 @@ class FixtureCommand extends Command
         $io = new SymfonyStyle($input, $output);
         $nbError = 0;
 
-        foreach (self::DATABASES as $database) {
+        foreach (static::LIST_DATABASE as $database) {
             $io->title("Loading fixtures for database: $database");
 
             // Construction de la commande de base

@@ -23,9 +23,7 @@ class TodolistFixtures extends AbstractFixture
         $manager->flush();
     }
 
-    /**
-     * @return string[]
-     */
+    /** @return string[] */
     public static function getGroups(): array
     {
         return ['second'];

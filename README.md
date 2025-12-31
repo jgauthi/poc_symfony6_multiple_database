@@ -31,7 +31,7 @@ composer install
 
 php bin/console doctrine:database:create
 php bin/console doctrine:database:create --connection=second
-php bin/console doctrine:migrations:migrate -n
+php bin/console app:migrations
 
 # Optional (require APP_ENV=dev)
 php bin/console app:fixtures
@@ -59,3 +59,13 @@ Your commit is checked by several dev tools (like phpstan, php cs fixer...). The
 For make new migrations in dev environnement, use the command `php bin/console make:migration` (this poc update the command with adding multiple databases support).
 
 When you use the command `make:entity`, you should add the database namespace before the entity name. Example: _Second\Article_.
+
+When a data fixture use an entity from another database, you should add the groups with the database name. Example:
+
+```php
+/** @return string[] */
+public static function getGroups(): array
+{
+	return ['second'];
+}
+```

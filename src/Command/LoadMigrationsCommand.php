@@ -1,14 +1,13 @@
 <?php
 /*******************************************************************************
- * @name: Command Make Migration for Multiple databases
- * @author: Jgauthi, created at [28july2023], url: <github.com/jgauthi/poc_symfony6_multiple_database>
+ * @name: Command Migrations Migrate for Multiple databases
+ * @author: Jgauthi, created at [30dec2025], url: <github.com/jgauthi/poc_symfony6_multiple_database>
  * @version: 1.1
  * @Requirements:
-    - PHP version >= 8.2+, Symfony 6.3+
-    - Doctrine with multiple configuration: https://symfony.com/doc/6.2/doctrine/multiple_entity_managers.html
-
+    - PHP version >= 8.3+, Symfony 6-7
+    - Doctrine with multiple configuration: https://symfony.com/doc/current/doctrine/multiple_entity_managers.html
+    - DoctrineMigrationsBundle
  *******************************************************************************/
-
 namespace App\Command;
 
 use Symfony\Component\Console\Attribute\AsCommand;
@@ -20,19 +19,18 @@ use Symfony\Component\DependencyInjection\Attribute\{Autowire, AsAlias};
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Process\Process;
 
-#[AsAlias(id: 'maker.maker.make_migration')]
 #[AsCommand(
-    name: 'make:migration',
-    description: 'Enhance the command for support multiple databases.',
+    name: 'app:migrations',
+    description: 'Launch migration for all databases',
 )]
-class MakeMigrationCommand extends Command
+class LoadMigrationsCommand extends Command
 {
     // Entity Manager name (groups should be used the same value)
-    private const array LIST_DATABASE = LoadMigrationsCommand::LIST_DATABASE;
+    public const array LIST_DATABASE = ['main', 'second'];
 
     /** @var bool[] */
     protected array $requirement;
-    protected string $command = 'doctrine:migrations:diff';
+    protected string $command = 'doctrine:migrations:migrate';
 
     public function __construct(
         KernelInterface $kernel,
@@ -61,7 +59,6 @@ class MakeMigrationCommand extends Command
                 'php',
                 'bin/console',
                 $this->command,
-                '--no-interaction',
                 '--em=' . $database,
             ];
 
